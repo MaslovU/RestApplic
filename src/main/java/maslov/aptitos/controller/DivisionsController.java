@@ -32,7 +32,6 @@ public class DivisionsController {
     @PostMapping
     public Divisions createDiv(@RequestBody Divisions divisions){
         divisions.setId((long) counter++);
-
         return divisionsRepo.save(divisions);
     }
 
