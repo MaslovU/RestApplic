@@ -18,9 +18,16 @@ public class EmployeesController {
         this.employeesRepo = employeesRepo;
     }
 
+//    @GetMapping
+//    public List<Employees> getAllEmp(){
+//        return employeesRepo.findAll();
+//    }
+
     @GetMapping
-    public List<Employees> getAllEmp(){
-        return employeesRepo.findAll();
+    public List<Employees> getName(
+            @RequestParam String name
+    ){
+        return employeesRepo.findByName(name);
     }
 
     @GetMapping("{id}")
