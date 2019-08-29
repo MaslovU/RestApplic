@@ -3,10 +3,8 @@ package maslov.aptitos.domain;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table
@@ -15,9 +13,11 @@ import javax.persistence.Table;
 public class Divisions {
 
     @Id
-//    @GeneratedValue
     private Long id;
     private String text;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "division")
+    private Set<Employees> employees;
 
     public Long getId() {
         return id;
