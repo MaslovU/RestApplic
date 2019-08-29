@@ -25,7 +25,7 @@ public class TelephonesController {
     }
 
     @GetMapping("{id}")
-    public Telephones getOne(@PathVariable("id") Telephones telephones){
+    public Telephones getOneTelefone(@PathVariable("id") Telephones telephones){
         return telephones;
     }
 

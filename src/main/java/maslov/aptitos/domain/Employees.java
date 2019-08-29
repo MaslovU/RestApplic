@@ -2,6 +2,7 @@ package maslov.aptitos.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.*;
 
@@ -14,6 +15,7 @@ public class Employees {
     @Id
     private Long id;
     private String name;
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "telephone_id")
     private Telephones telephone;

@@ -25,9 +25,14 @@ public class DivisionsController {
     }
 
     @GetMapping("{id}")
-    public Divisions getOne(@PathVariable("id") Divisions divisions) {
+    public Divisions getOneDivision(@PathVariable("id") Divisions divisions) {
         return divisions;
     }
+
+//    @GetMapping("{text}")
+//    public String getDivisionByName(@PathVariable("text") Divisions divisions) {
+//        return divisions.getText();
+//    }
 
     @PostMapping
     public Divisions createDiv(@RequestBody Divisions divisions){

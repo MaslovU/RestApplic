@@ -29,7 +29,7 @@ public class MessageController {
 
     @GetMapping("{id}")
     @JsonView(Views.FullMessage.class)
-    public Message getOne (@PathVariable("id") Message message){
+    public Message getOneMessage (@PathVariable("id") Message message){
         return message;
     }
 
