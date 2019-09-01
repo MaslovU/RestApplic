@@ -29,11 +29,6 @@ public class DivisionsController {
         return divisions;
     }
 
-//    @GetMapping("{text}")
-//    public String getDivisionByName(@PathVariable("text") Divisions divisions) {
-//        return divisions.getText();
-//    }
-
     @PostMapping
     public Divisions createDiv(@RequestBody Divisions divisions){
         divisions.setId((long) counter++);
