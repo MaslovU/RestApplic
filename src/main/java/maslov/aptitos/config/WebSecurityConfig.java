@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 import java.time.LocalDateTime;
 
+import static org.hibernate.criterion.Restrictions.and;
+
 @Configuration
 @EnableWebSecurity
 @EnableOAuth2Sso
@@ -20,9 +22,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .antMatcher("/**")
                 .authorizeRequests()
-                .mvcMatchers("/").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/", "/login**", "/js/**", "/error**")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
                 .and()
                 .csrf().disable();
     }
