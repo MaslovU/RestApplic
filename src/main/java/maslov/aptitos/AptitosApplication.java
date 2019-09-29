@@ -1,3 +1,6 @@
+/*
+Created by Maslov in 09.2019
+ */
 package maslov.aptitos;
 
 import org.springframework.boot.SpringApplication;
