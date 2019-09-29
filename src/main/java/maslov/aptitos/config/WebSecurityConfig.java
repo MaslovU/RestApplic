@@ -2,7 +2,6 @@ package maslov.aptitos.config;
 
 import maslov.aptitos.domain.SuperUser;
 import maslov.aptitos.repo.UserDetailsRepo;
-import org.apache.catalina.User;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;
 import org.springframework.context.annotation.Bean;
@@ -13,12 +12,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 import java.time.LocalDateTime;
 
-import static org.hibernate.criterion.Restrictions.and;
-
 @Configuration
 @EnableWebSecurity
 @EnableOAuth2Sso
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http

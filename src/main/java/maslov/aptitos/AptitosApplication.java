@@ -9,5 +9,4 @@ public class AptitosApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AptitosApplication.class, args);
 	}
-
 }

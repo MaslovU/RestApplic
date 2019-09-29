@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("division")
 public class DivisionsController {
+
     private int counter = 1;
     private final DivisionsRepo divisionsRepo;
 

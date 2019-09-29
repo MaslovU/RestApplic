@@ -13,6 +13,7 @@ import java.util.HashMap;
 @Controller
 @RequestMapping("/")
 public class MainController {
+
     private final MessageRepo messageRepo;
 
     public MainController(MessageRepo messageRepo) {

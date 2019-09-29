@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @ToString(of = {"id", "text"})
 @EqualsAndHashCode(of = {"id"})
 public class Message {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonView(Views.Id.class)
