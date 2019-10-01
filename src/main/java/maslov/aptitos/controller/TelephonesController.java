@@ -27,28 +27,25 @@ public class TelephonesController {
     }
 
     @GetMapping("{id}")
-    public Telephones getOneTelefone(@PathVariable("id") Telephones telephones){
+    public Telephones getOneTelefone( @PathVariable("id") Telephones telephones ){
         return telephones;
     }
 
     @PostMapping
-    public Telephones createtel(@RequestBody Telephones telephones){
+    public Telephones createtel( @RequestBody Telephones telephones ){
         telephones.setId((long) counter++);
         return telephonesRepo.save(telephones);
     }
 
     @PutMapping("{id}")
-    public Telephones changeTel(
-            @PathVariable("id") Telephones telephonesFromDB,
-            @RequestBody Telephones telephones){
+    public Telephones changeTel( @PathVariable("id") Telephones telephonesFromDB,
+                                 @RequestBody Telephones telephones ) {
         BeanUtils.copyProperties(telephones, telephonesFromDB, "id");
         return telephonesRepo.save(telephonesFromDB);
     }
 
     @DeleteMapping("{id}")
-    public void delTel(
-            @PathVariable("id") Telephones telephones
-    ){
+    public void delTel( @PathVariable("id") Telephones telephones ) {
         telephonesRepo.delete(telephones);
     }
 }

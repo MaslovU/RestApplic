@@ -14,12 +14,12 @@ public class ManyEmployeesControler {
 
     private final EmployeesRepo employeesRepo;
 
-    public ManyEmployeesControler(EmployeesRepo employeesRepo) {
+    public ManyEmployeesControler( EmployeesRepo employeesRepo ) {
         this.employeesRepo = employeesRepo;
     }
 
     @GetMapping
-    public List<Employees> getAllEmp(){
+    public List<Employees> getAllEmp() {
         return employeesRepo.findAll();
     }
 }

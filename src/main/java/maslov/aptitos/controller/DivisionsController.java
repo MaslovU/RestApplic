@@ -16,7 +16,7 @@ public class DivisionsController {
     private final DivisionsRepo divisionsRepo;
 
     @Autowired
-    public DivisionsController(DivisionsRepo divisionsRepo) {
+    public DivisionsController( DivisionsRepo divisionsRepo ) {
         this.divisionsRepo = divisionsRepo;
     }
 
@@ -26,29 +26,25 @@ public class DivisionsController {
     }
 
     @GetMapping("{id}")
-    public Divisions getOneDivision(@PathVariable("id") Divisions divisions) {
+    public Divisions getOneDivision( @PathVariable("id") Divisions divisions ) {
         return divisions;
     }
 
     @PostMapping
-    public Divisions createDiv(@RequestBody Divisions divisions){
+    public Divisions createDiv( @RequestBody Divisions divisions ) {
         divisions.setId((long) counter++);
         return divisionsRepo.save(divisions);
     }
 
     @PutMapping("{id}")
-    public Divisions update (
-            @PathVariable("{id}") Divisions divisionsFromDB,
-            @RequestBody Divisions divisions
-    ){
+    public Divisions update( @PathVariable("{id}") Divisions divisionsFromDB,
+                             @RequestBody Divisions divisions ){
         BeanUtils.copyProperties(divisions, divisionsFromDB, "id");
         return divisionsRepo.save(divisionsFromDB);
     }
 
     @DeleteMapping("{id}")
-    public void del(
-            @PathVariable("id") Divisions divisions
-    ){
+    public void del( @PathVariable("id") Divisions divisions ){
         divisionsRepo.delete(divisions);
     }
 }

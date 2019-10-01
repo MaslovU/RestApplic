@@ -18,7 +18,7 @@ public class MessageController {
     private final MessageRepo messageRepo;
 
     @Autowired
-    public MessageController(MessageRepo messageRepo) {
+    public MessageController( MessageRepo messageRepo ) {
         this.messageRepo = messageRepo;
     }
 
@@ -30,27 +30,25 @@ public class MessageController {
 
     @GetMapping("{id}")
     @JsonView(Views.FullMessage.class)
-    public Message getOneMessage (@PathVariable("id") Message message){
+    public Message getOneMessage( @PathVariable("id") Message message ) {
         return message;
     }
 
     @PostMapping
-    public Message create(@RequestBody Message message) {
+    public Message create( @RequestBody Message message ) {
         message.setCreationDate(LocalDateTime.now());
         return messageRepo.save(message);
     }
 
     @PutMapping("{id}")
-    public Message update(
-            @PathVariable("id") Message messageFromDB,
-            @RequestBody Message message
-    ) {
+    public Message update( @PathVariable("id") Message messageFromDB,
+                           @RequestBody Message message ) {
         BeanUtils.copyProperties(message, messageFromDB, "id");
         return messageRepo.save(messageFromDB);
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable("id") Message message) {
+    public void delete( @PathVariable("id") Message message ) {
         messageRepo.delete(message);
     }
 }

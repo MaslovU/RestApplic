@@ -20,40 +20,30 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public List<Employees> getName(
-            @RequestParam String name
-    ){
+    public List<Employees> getName( @RequestParam String name ){
         return employeeRepo.findByNameContaining(name);
     }
 
     @GetMapping("{id}")
-    public Employees getEmployee(
-            @PathVariable("id") Employees employees
-    ){
+    public Employees getEmployee( @PathVariable("id") Employees employees ) {
         return employees;
     }
 
     @PostMapping
-    public Employees createEmployee(
-            @RequestBody Employees employees
-    ){
+    public Employees createEmployee( @RequestBody Employees employees ) {
         employees.setId((long) counter++);
         return employeeRepo.save(employees);
     }
 
     @PutMapping("{id}")
-    public Employees changeEmployee(
-            @PathVariable("id") Employees employeesFromDB,
-            @RequestBody Employees employees
-    ){
+    public Employees changeEmployee( @PathVariable("id") Employees employeesFromDB,
+                                     @RequestBody Employees employees ) {
         BeanUtils.copyProperties(employees, employeesFromDB, "id");
         return employeeRepo.save(employeesFromDB);
     }
 
     @DeleteMapping
-    public void delEmployee(
-            @PathVariable("id") Employees employees
-    ){
+    public void delEmployee( @PathVariable("id") Employees employees ) {
         employeeRepo.delete(employees);
     }
 }

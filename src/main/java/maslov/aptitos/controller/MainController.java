@@ -21,7 +21,7 @@ public class MainController {
     }
 
     @GetMapping
-    public String main(Model model, @AuthenticationPrincipal SuperUser superUser){
+    public String main( Model model, @AuthenticationPrincipal SuperUser superUser ){
         HashMap<Object, Object> data = new HashMap<>();
 
         data.put("profile", superUser);

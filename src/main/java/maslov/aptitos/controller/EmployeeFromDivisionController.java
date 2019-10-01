@@ -20,8 +20,7 @@ public class EmployeeFromDivisionController {
     }
 
     @GetMapping
-    List<Employees> findEmployeeFromDivision(@RequestParam String text)
-    {
+    List<Employees> findEmployeeFromDivision( @RequestParam String text ) {
         return employeeRepo.findByDivision(text);
     }
 }
