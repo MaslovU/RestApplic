@@ -6,6 +6,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("employee")
@@ -26,10 +27,8 @@ public class EmployeeController {
     }
 
     @GetMapping("{id}")
-    public Employees getEmployee(
-            @PathVariable("id") Employees employees
-    ){
-        return employees;
+    public Optional<Employees> getEmployee(@PathVariable Long id) {
+        return employeeRepo.findById(id);
     }
 
     @PostMapping

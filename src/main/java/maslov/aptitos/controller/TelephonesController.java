@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("telephone")
@@ -20,17 +21,17 @@ public class TelephonesController {
     }
 
     @GetMapping
-    public List<Telephones> getAll(){
+    public List<Telephones> getAll() {
         return telephonesRepo.findAll();
     }
 
     @GetMapping("{id}")
-    public Telephones getOneTelefone(@PathVariable("id") Telephones telephones){
-        return telephones;
+    public Optional<Telephones> getOneTelephone(@PathVariable Long id){
+        return telephonesRepo.findById(id);
     }
 
     @PostMapping
-    public Telephones createtel(@RequestBody Telephones telephones){
+    public Telephones createTel(@RequestBody Telephones telephones){
         telephones.setId((long) counter++);
         return telephonesRepo.save(telephones);
     }
@@ -44,9 +45,7 @@ public class TelephonesController {
     }
 
     @DeleteMapping("{id}")
-    public void delTel(
-            @PathVariable("id") Telephones telephones
-    ){
-        telephonesRepo.delete(telephones);
+    public void delTel(@PathVariable Long id) {
+        telephonesRepo.deleteById(id);
     }
 }

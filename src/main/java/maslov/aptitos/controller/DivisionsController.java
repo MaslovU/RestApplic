@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("division")
@@ -25,8 +26,8 @@ public class DivisionsController {
     }
 
     @GetMapping("{id}")
-    public Divisions getOneDivision(@PathVariable("id") Divisions divisions) {
-        return divisions;
+    public Optional<Divisions> getOneDivision(@PathVariable Long id) {
+        return divisionsRepo.findById(id);
     }
 
     @PostMapping

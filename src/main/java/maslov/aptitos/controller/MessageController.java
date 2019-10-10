@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("message")
@@ -29,8 +30,8 @@ public class MessageController {
 
     @GetMapping("{id}")
     @JsonView(Views.FullMessage.class)
-    public Message getOneMessage (@PathVariable("id") Message message){
-        return message;
+    public Optional<Message> getOneMessage (@PathVariable Long id){
+        return messageRepo.findById(id);
     }
 
     @PostMapping
@@ -49,7 +50,7 @@ public class MessageController {
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable("id") Message message) {
-        messageRepo.delete(message);
+    public void delete(@PathVariable Long id) {
+        messageRepo.deleteById(id);
     }
 }
