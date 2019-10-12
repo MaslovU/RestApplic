@@ -7,6 +7,7 @@ import maslov.aptitos.services.MessageService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +15,12 @@ import java.util.Optional;
 @RestController
 @RequestMapping("message")
 public class MessageController {
+
+    private MessageService messageService;
+
+    public MessageController(MessageRepo messageRepo) {
+        messageService = new MessageService(messageRepo);
+    }
 
     @GetMapping
     @JsonView(Views.IdName.class)

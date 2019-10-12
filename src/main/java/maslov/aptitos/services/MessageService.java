@@ -7,21 +7,14 @@ import java.util.List;
 import java.util.Optional;
 
 public class MessageService {
-    private static SimpleJpaRepository messageRepo;
+
+    private final MessageRepo messageRepo;
 
     public MessageService(MessageRepo messageRepo) {
-        MessageService.messageRepo = (SimpleJpaRepository) messageRepo;
+        this.messageRepo = messageRepo;
     }
 
-    public static Optional<? extends Object> getMessage(Long id) {
-        return messageRepo.findById(id);
-    }
-
-    public static List<? extends Object> getAllMessages() {
+    public List<Message> allMessage() {
         return messageRepo.findAll();
-    }
-
-    public static void deleteMessage(Long id) {
-        messageRepo.deleteById(id);
     }
 }
