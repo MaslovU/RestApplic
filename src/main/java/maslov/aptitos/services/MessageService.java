@@ -1,5 +1,6 @@
 package maslov.aptitos.services;
 
+import maslov.aptitos.domain.Message;
 import maslov.aptitos.repo.MessageRepo;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
@@ -16,5 +17,9 @@ public class MessageService {
 
     public List<Message> allMessage() {
         return messageRepo.findAll();
+    }
+
+    public Optional getMessage(Long id) {
+        return messageRepo.findById(id);
     }
 }
