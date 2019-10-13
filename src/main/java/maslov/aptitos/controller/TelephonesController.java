@@ -3,7 +3,6 @@ package maslov.aptitos.controller;
 import maslov.aptitos.domain.Telephones;
 import maslov.aptitos.repo.TelephonesRepo;
 import maslov.aptitos.services.TelephonesService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,19 +26,19 @@ public class TelephonesController {
     }
 
     @GetMapping("{id}")
-    public Optional getTelephone(@PathVariable Long id){
+    public Optional getTelephone(@PathVariable Long id) {
         return telephonesService.getOneTelephone(id);
     }
 
     @PostMapping
-    public Telephones createTel(@RequestBody Telephones telephones){
+    public Telephones createTel(@RequestBody Telephones telephones) {
         return telephonesService.createTelephone(telephones);
     }
 
     @PutMapping("{id}")
     public Telephones changeTel(
             @PathVariable("id") Telephones telephonesFromDB,
-            @RequestBody Telephones telephones){
+            @RequestBody Telephones telephones) {
         return telephonesService.changeTelephones(telephones, telephonesFromDB);
     }
 

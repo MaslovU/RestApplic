@@ -28,7 +28,7 @@ public class DivisionsController {
     }
 
     @PostMapping
-    public Divisions createDiv(@RequestBody Divisions divisions){
+    public Divisions createDiv(@RequestBody Divisions divisions) {
         return divisionsService.createNewDivision(divisions);
     }
 
@@ -40,7 +40,7 @@ public class DivisionsController {
     }
 
     @DeleteMapping("{id}")
-    public void del(@PathVariable Long id){
+    public void del(@PathVariable Long id) {
         divisionsService.deleteDivision(id);
     }
 }

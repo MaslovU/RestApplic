@@ -28,7 +28,7 @@ public class MessageController {
 
     @GetMapping("{id}")
     @JsonView(Views.IdName.class)
-    public Optional getOneMessage (@PathVariable Long id){
+    public Optional getOneMessage (@PathVariable Long id) {
         return messageService.getMessage(id);
     }
 
@@ -40,8 +40,7 @@ public class MessageController {
     @PutMapping("{id}")
     public Message update(
             @PathVariable("id") Message messageFromDB,
-            @RequestBody Message message
-    ) {
+            @RequestBody Message message) {
         return messageService.updateMessage(message, messageFromDB);
     }
 
