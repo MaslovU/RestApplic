@@ -3,6 +3,7 @@ package maslov.aptitos.services;
 import maslov.aptitos.domain.Message;
 import maslov.aptitos.repo.MessageRepo;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ public class MessageService  {
 
     private final MessageRepo messageRepo;
 
+    @Autowired
     public MessageService(MessageRepo messageRepo) {
         this.messageRepo = messageRepo;
     }

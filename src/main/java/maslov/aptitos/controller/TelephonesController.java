@@ -2,6 +2,7 @@ package maslov.aptitos.controller;
 
 import maslov.aptitos.domain.Telephones;
 import maslov.aptitos.repo.TelephonesRepo;
+import maslov.aptitos.services.TelephonesService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,40 +13,38 @@ import java.util.Optional;
 @RestController
 @RequestMapping("telephone")
 public class TelephonesController {
-    private int counter = 1;
-    private final TelephonesRepo telephonesRepo;
+
+    private final TelephonesService telephonesService;
 
     @Autowired
     public TelephonesController(TelephonesRepo telephonesRepo) {
-        this.telephonesRepo = telephonesRepo;
+        telephonesService = new TelephonesService(telephonesRepo);
     }
 
     @GetMapping
     public List<Telephones> getAll() {
-        return telephonesRepo.findAll();
+        return telephonesService.findAllTelephones();
     }
 
     @GetMapping("{id}")
-    public Optional<Telephones> getOneTelephone(@PathVariable Long id){
-        return telephonesRepo.findById(id);
+    public Optional getTelephone(@PathVariable Long id){
+        return telephonesService.getOneTelephone(id);
     }
 
     @PostMapping
     public Telephones createTel(@RequestBody Telephones telephones){
-        telephones.setId((long) counter++);
-        return telephonesRepo.save(telephones);
+        return telephonesService.createTelephone(telephones);
     }
 
     @PutMapping("{id}")
     public Telephones changeTel(
             @PathVariable("id") Telephones telephonesFromDB,
             @RequestBody Telephones telephones){
-        BeanUtils.copyProperties(telephones, telephonesFromDB, "id");
-        return telephonesRepo.save(telephonesFromDB);
+        return telephonesService.changeTelephones(telephones, telephonesFromDB);
     }
 
     @DeleteMapping("{id}")
     public void delTel(@PathVariable Long id) {
-        telephonesRepo.deleteById(id);
+        telephonesService.deleteTelephone(id);
     }
 }
