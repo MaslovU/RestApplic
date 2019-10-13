@@ -2,7 +2,6 @@ package maslov.aptitos.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.*;
 
