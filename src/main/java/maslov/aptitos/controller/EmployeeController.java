@@ -2,58 +2,45 @@ package maslov.aptitos.controller;
 
 import maslov.aptitos.domain.Employees;
 import maslov.aptitos.repo.EmployeesRepo;
-import org.springframework.beans.BeanUtils;
+import maslov.aptitos.services.EmployeesService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("employee")
 public class EmployeeController {
+    private EmployeesService employeesService;
 
-    private int counter = 1;
-
-    private final EmployeesRepo employeeRepo;
-
-    public EmployeeController(EmployeesRepo employeeRepo) {
-        this.employeeRepo = employeeRepo;
+    public EmployeeController(EmployeesRepo employeesRepo) {
+        employeesService = new EmployeesService(employeesRepo);
     }
 
     @GetMapping
-    public List<Employees> getName(
-            @RequestParam String name
-    ){
-        return employeeRepo.findByNameContaining(name);
+    public List<Employees> getByName(@RequestParam String name) {
+        return employeesService.getEmployeeByName(name);
     }
 
     @GetMapping("{id}")
-    public Employees getEmployee(
-            @PathVariable("id") Employees employees
-    ){
-        return employees;
+    public Optional<Employees> getEmployee(@PathVariable Long id) {
+        return employeesService.getEmployeeById(id);
     }
 
     @PostMapping
-    public Employees createEmployee(
-            @RequestBody Employees employees
-    ){
-        employees.setId((long) counter++);
-        return employeeRepo.save(employees);
+    public Employees createEmployee(@RequestBody Employees employees) {
+        return employeesService.createNewEmployee(employees);
     }
 
     @PutMapping("{id}")
     public Employees changeEmployee(
             @PathVariable("id") Employees employeesFromDB,
-            @RequestBody Employees employees
-    ){
-        BeanUtils.copyProperties(employees, employeesFromDB, "id");
-        return employeeRepo.save(employeesFromDB);
+            @RequestBody Employees employees) {
+        return employeesService.editEmployee(employees, employeesFromDB);
     }
 
     @DeleteMapping
-    public void delEmployee(
-            @PathVariable("id") Employees employees
-    ){
-        employeeRepo.delete(employees);
+    public void delEmployee( @PathVariable Long id) {
+        employeesService.deleteEmployeeByID(id);
     }
 }
