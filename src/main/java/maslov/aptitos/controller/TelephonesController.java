@@ -4,6 +4,7 @@ import maslov.aptitos.domain.Telephones;
 import maslov.aptitos.repo.TelephonesRepo;
 import maslov.aptitos.services.TelephonesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,11 +31,13 @@ public class TelephonesController {
         return telephonesService.getOneTelephone(id);
     }
 
+    @Transactional
     @PostMapping
     public Telephones createTel(@RequestBody Telephones telephones) {
         return telephonesService.createTelephone(telephones);
     }
 
+    @Transactional
     @PutMapping("{id}")
     public Telephones changeTel(
             @PathVariable("id") Telephones telephonesFromDB,
@@ -42,6 +45,7 @@ public class TelephonesController {
         return telephonesService.changeTelephones(telephones, telephonesFromDB);
     }
 
+    @Transactional
     @DeleteMapping("{id}")
     public void delTel(@PathVariable Long id) {
         telephonesService.deleteTelephone(id);

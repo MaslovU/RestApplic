@@ -3,6 +3,7 @@ package maslov.aptitos.controller;
 import maslov.aptitos.domain.Employees;
 import maslov.aptitos.repo.EmployeesRepo;
 import maslov.aptitos.services.EmployeesService;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,11 +28,13 @@ public class EmployeeController {
         return employeesService.getEmployeeById(id);
     }
 
+    @Transactional
     @PostMapping
     public Employees createEmployee(@RequestBody Employees employees) {
         return employeesService.createNewEmployee(employees);
     }
 
+    @Transactional
     @PutMapping("{id}")
     public Employees changeEmployee(
             @PathVariable("id") Employees employeesFromDB,
@@ -39,6 +42,7 @@ public class EmployeeController {
         return employeesService.editEmployee(employees, employeesFromDB);
     }
 
+    @Transactional
     @DeleteMapping
     public void delEmployee( @PathVariable Long id) {
         employeesService.deleteEmployeeByID(id);
