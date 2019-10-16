@@ -4,6 +4,7 @@ import maslov.aptitos.domain.Message;
 import maslov.aptitos.repo.MessageRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,16 +27,19 @@ public class MessageService  {
         return messageRepo.findById(id);
     }
 
+    @Transactional
     public Message createMessage(Message message) {
         message.setCreationDate(LocalDateTime.now());
         return messageRepo.save(message);
     }
 
+    @Transactional
     public Message updateMessage(Message message, Message messageFromDB) {
         BeanUtils.copyProperties(message, messageFromDB, "id");
         return messageRepo.save(messageFromDB);
     }
 
+    @Transactional
     public void delMessage(Long id) {
         messageRepo.deleteById(id);
     }

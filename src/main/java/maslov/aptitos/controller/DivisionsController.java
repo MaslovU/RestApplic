@@ -3,7 +3,6 @@ package maslov.aptitos.controller;
 import maslov.aptitos.domain.Divisions;
 import maslov.aptitos.repo.DivisionsRepo;
 import maslov.aptitos.services.DivisionsService;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,13 +27,11 @@ public class DivisionsController {
         return divisionsService.oneDivision(id);
     }
 
-    @Transactional
     @PostMapping
     public Divisions createDiv(@RequestBody Divisions divisions) {
         return divisionsService.createNewDivision(divisions);
     }
 
-    @Transactional
     @PutMapping("{id}")
     public Divisions update (
             @PathVariable("{id}") Divisions divisionsFromDB,
@@ -42,7 +39,6 @@ public class DivisionsController {
         return divisionsService.updateDivision(divisions, divisionsFromDB);
     }
 
-    @Transactional
     @DeleteMapping("{id}")
     public void del(@PathVariable Long id) {
         divisionsService.deleteDivision(id);

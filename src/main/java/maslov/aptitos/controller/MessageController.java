@@ -5,7 +5,6 @@ import maslov.aptitos.domain.Message;
 import maslov.aptitos.domain.Views;
 import maslov.aptitos.repo.MessageRepo;
 import maslov.aptitos.services.MessageService;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,13 +32,11 @@ public class MessageController {
         return messageService.getMessage(id);
     }
 
-    @Transactional
     @PostMapping
     public Message create(@RequestBody Message message) {
         return messageService.createMessage(message);
     }
 
-    @Transactional
     @PutMapping("{id}")
     public Message update(
             @PathVariable("id") Message messageFromDB,
@@ -47,7 +44,6 @@ public class MessageController {
         return messageService.updateMessage(message, messageFromDB);
     }
 
-    @Transactional
     @DeleteMapping("{id}")
     public void delete(@PathVariable Long id) {
         messageService.delMessage(id);

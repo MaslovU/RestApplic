@@ -4,6 +4,7 @@ import maslov.aptitos.domain.Divisions;
 import maslov.aptitos.repo.DivisionsRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,16 +26,19 @@ public class DivisionsService {
         return divisionsRepo.findById(id);
     }
 
+    @Transactional
     public Divisions createNewDivision(Divisions divisions) {
         divisions.setId((long) counter++);
         return divisionsRepo.save(divisions);
     }
 
+    @Transactional
     public Divisions updateDivision(Divisions divisions, Divisions divisionsFromDB) {
         BeanUtils.copyProperties(divisions, divisionsFromDB, "id");
         return divisionsRepo.save(divisionsFromDB);
     }
 
+    @Transactional
     public void deleteDivision(Long id) {
         divisionsRepo.deleteById(id);
     }

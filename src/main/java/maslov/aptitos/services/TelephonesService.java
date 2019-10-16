@@ -4,6 +4,7 @@ import maslov.aptitos.domain.Telephones;
 import maslov.aptitos.repo.TelephonesRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,16 +27,19 @@ public class TelephonesService {
         return telephonesRepo.findById(id);
     }
 
+    @Transactional
     public Telephones createTelephone(Telephones telephones) {
         telephones.setId((long) counter++);
         return telephonesRepo.save(telephones);
     }
 
+    @Transactional
     public Telephones changeTelephones(Telephones telephones, Telephones telephonesFromDB) {
         BeanUtils.copyProperties(telephones, telephonesFromDB, "id");
         return telephonesRepo.save(telephonesFromDB);
     }
 
+    @Transactional
     public void deleteTelephone(Long id) {
         telephonesRepo.deleteById(id);
     }
