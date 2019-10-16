@@ -1,5 +1,5 @@
 /*
-Created by Maslov in 09.2019
+Created by Maslov in 10.2019
  */
 package maslov.aptitos;
 
