@@ -4,12 +4,14 @@ import maslov.aptitos.domain.Employees;
 import maslov.aptitos.repo.EmployeesRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class EmployeesService {
+    private int counter = 1;
 
     private final EmployeesRepo employeeRepo;
 
@@ -29,11 +31,13 @@ public class EmployeesService {
         return employeeRepo.save(employees);
     }
 
+    @Transactional
     public Employees editEmployee(Employees employees, Employees employeesFromDB) {
         BeanUtils.copyProperties(employees, employeesFromDB, "id");
         return employeeRepo.save(employeesFromDB);
     }
 
+    @Transactional
     public void deleteEmployeeByID(Long id) {
         employeeRepo.deleteById(id);
     }

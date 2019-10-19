@@ -5,6 +5,7 @@ import maslov.aptitos.repo.TelephonesRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,11 +32,13 @@ public class TelephonesService {
         return telephonesRepo.save(telephones);
     }
 
+    @Transactional
     public Telephones changeTelephones(Telephones telephones, Telephones telephonesFromDB) {
         BeanUtils.copyProperties(telephones, telephonesFromDB, "id");
         return telephonesRepo.save(telephonesFromDB);
     }
 
+    @Transactional
     public void deleteTelephone(Long id) {
         telephonesRepo.deleteById(id);
     }
