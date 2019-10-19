@@ -3,52 +3,48 @@ package maslov.aptitos.controller;
 import com.fasterxml.jackson.annotation.JsonView;
 import maslov.aptitos.domain.Message;
 import maslov.aptitos.domain.Views;
-import maslov.aptitos.repo.MessageRepo;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import maslov.aptitos.services.MessageService;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("message")
 public class MessageController {
 
-    private final MessageRepo messageRepo;
+    private MessageService messageService;
 
-    @Autowired
-    public MessageController( MessageRepo messageRepo ) {
-        this.messageRepo = messageRepo;
+    public MessageController(MessageService messageService) {
+        this.messageService = messageService;
     }
 
     @GetMapping
     @JsonView(Views.IdName.class)
-    public List<Message> list() {
-        return messageRepo.findAll();
+    public List list() {
+        return messageService.allMessage();
     }
 
     @GetMapping("{id}")
-    @JsonView(Views.FullMessage.class)
-    public Message getOneMessage( @PathVariable("id") Message message ) {
-        return message;
+    @JsonView(Views.IdName.class)
+    public Optional getOneMessage (@PathVariable Long id) {
+        return messageService.getMessage(id);
     }
 
     @PostMapping
-    public Message create( @RequestBody Message message ) {
-        message.setCreationDate(LocalDateTime.now());
-        return messageRepo.save(message);
+    public Message create(@RequestBody Message message) {
+        return messageService.createMessage(message);
     }
 
     @PutMapping("{id}")
-    public Message update( @PathVariable("id") Message messageFromDB,
-                           @RequestBody Message message ) {
-        BeanUtils.copyProperties(message, messageFromDB, "id");
-        return messageRepo.save(messageFromDB);
+    public Message update(
+            @PathVariable("id") Message messageFromDB,
+            @RequestBody Message message) {
+        return messageService.updateMessage(message, messageFromDB);
     }
 
     @DeleteMapping("{id}")
-    public void delete( @PathVariable("id") Message message ) {
-        messageRepo.delete(message);
+    public void delete(@PathVariable Long id) {
+        messageService.delMessage(id);
     }
 }

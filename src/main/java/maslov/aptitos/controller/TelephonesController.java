@@ -1,51 +1,46 @@
 package maslov.aptitos.controller;
 
 import maslov.aptitos.domain.Telephones;
-import maslov.aptitos.repo.TelephonesRepo;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import maslov.aptitos.services.TelephonesService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("telephone")
 public class TelephonesController {
 
-    private int counter = 1;
+    private final TelephonesService telephonesService;
 
-    private final TelephonesRepo telephonesRepo;
-
-    @Autowired
-    public TelephonesController(TelephonesRepo telephonesRepo) {
-        this.telephonesRepo = telephonesRepo;
+    public TelephonesController(TelephonesService telephonesService) {
+        this.telephonesService = telephonesService;
     }
 
     @GetMapping
-    public List<Telephones> getAll(){
-        return telephonesRepo.findAll();
+    public List<Telephones> getAll() {
+        return telephonesService.findAllTelephones();
     }
 
     @GetMapping("{id}")
-    public Telephones getOneTelefone( @PathVariable("id") Telephones telephones ){
-        return telephones;
+    public Optional getTelephone(@PathVariable Long id) {
+        return telephonesService.getOneTelephone(id);
     }
 
     @PostMapping
-    public Telephones createtel( @RequestBody Telephones telephones ){
-        telephones.setId((long) counter++);
-        return telephonesRepo.save(telephones);
+    public Telephones createTel(@RequestBody Telephones telephones) {
+        return telephonesService.createTelephone(telephones);
     }
 
     @PutMapping("{id}")
-    public Telephones changeTel( @PathVariable("id") Telephones telephonesFromDB,
-                                 @RequestBody Telephones telephones ) {
-        BeanUtils.copyProperties(telephones, telephonesFromDB, "id");
-        return telephonesRepo.save(telephonesFromDB);
+    public Telephones changeTel(
+            @PathVariable("id") Telephones telephonesFromDB,
+            @RequestBody Telephones telephones) {
+        return telephonesService.changeTelephones(telephones, telephonesFromDB);
     }
 
     @DeleteMapping("{id}")
-    public void delTel( @PathVariable("id") Telephones telephones ) {
-        telephonesRepo.delete(telephones);
+    public void delTel(@PathVariable Long id) {
+        telephonesService.deleteTelephone(id);
     }
 }

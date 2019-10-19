@@ -1,50 +1,46 @@
 package maslov.aptitos.controller;
 
 import maslov.aptitos.domain.Divisions;
-import maslov.aptitos.repo.DivisionsRepo;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import maslov.aptitos.services.DivisionsService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("division")
 public class DivisionsController {
 
-    private int counter = 1;
-    private final DivisionsRepo divisionsRepo;
+    private DivisionsService divisionsService;
 
-    @Autowired
-    public DivisionsController( DivisionsRepo divisionsRepo ) {
-        this.divisionsRepo = divisionsRepo;
+    public DivisionsController(DivisionsService divisionsService) {
+        this.divisionsService = divisionsService;
     }
 
     @GetMapping
-    public List<Divisions> list() {
-        return divisionsRepo.findAll();
+    public List list() {
+        return divisionsService.allDivisions();
     }
 
     @GetMapping("{id}")
-    public Divisions getOneDivision( @PathVariable("id") Divisions divisions ) {
-        return divisions;
+    public Optional<Divisions> getOneDivision(@PathVariable Long id) {
+        return divisionsService.oneDivision(id);
     }
 
     @PostMapping
-    public Divisions createDiv( @RequestBody Divisions divisions ) {
-        divisions.setId((long) counter++);
-        return divisionsRepo.save(divisions);
+    public Divisions createDiv(@RequestBody Divisions divisions) {
+        return divisionsService.createNewDivision(divisions);
     }
 
     @PutMapping("{id}")
-    public Divisions update( @PathVariable("{id}") Divisions divisionsFromDB,
-                             @RequestBody Divisions divisions ){
-        BeanUtils.copyProperties(divisions, divisionsFromDB, "id");
-        return divisionsRepo.save(divisionsFromDB);
+    public Divisions update (
+            @PathVariable("{id}") Divisions divisionsFromDB,
+            @RequestBody Divisions divisions) {
+        return divisionsService.updateDivision(divisions, divisionsFromDB);
     }
 
     @DeleteMapping("{id}")
-    public void del( @PathVariable("id") Divisions divisions ){
-        divisionsRepo.delete(divisions);
+    public void del(@PathVariable Long id) {
+        divisionsService.deleteDivision(id);
     }
 }
