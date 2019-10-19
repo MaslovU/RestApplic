@@ -3,7 +3,6 @@ package maslov.aptitos.controller;
 import com.fasterxml.jackson.annotation.JsonView;
 import maslov.aptitos.domain.Message;
 import maslov.aptitos.domain.Views;
-import maslov.aptitos.repo.MessageRepo;
 import maslov.aptitos.services.MessageService;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +15,8 @@ public class MessageController {
 
     private MessageService messageService;
 
-    public MessageController(MessageRepo messageRepo) {
-        messageService = new MessageService(messageRepo);
+    public MessageController(MessageService messageService) {
+        this.messageService = messageService;
     }
 
     @GetMapping

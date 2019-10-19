@@ -1,9 +1,7 @@
 package maslov.aptitos.controller;
 
 import maslov.aptitos.domain.Telephones;
-import maslov.aptitos.repo.TelephonesRepo;
 import maslov.aptitos.services.TelephonesService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,9 +13,8 @@ public class TelephonesController {
 
     private final TelephonesService telephonesService;
 
-    @Autowired
-    public TelephonesController(TelephonesRepo telephonesRepo) {
-        telephonesService = new TelephonesService(telephonesRepo);
+    public TelephonesController(TelephonesService telephonesService) {
+        this.telephonesService = telephonesService;
     }
 
     @GetMapping

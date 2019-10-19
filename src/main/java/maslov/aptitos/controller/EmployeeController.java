@@ -1,7 +1,6 @@
 package maslov.aptitos.controller;
 
 import maslov.aptitos.domain.Employees;
-import maslov.aptitos.repo.EmployeesRepo;
 import maslov.aptitos.services.EmployeesService;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +12,8 @@ import java.util.Optional;
 public class EmployeeController {
     private EmployeesService employeesService;
 
-    public EmployeeController(EmployeesRepo employeesRepo) {
-        employeesService = new EmployeesService(employeesRepo);
+    public EmployeeController(EmployeesService employeesService) {
+        this.employeesService = employeesService;
     }
 
     @GetMapping

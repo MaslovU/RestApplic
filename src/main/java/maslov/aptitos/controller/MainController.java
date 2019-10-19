@@ -1,7 +1,7 @@
 package maslov.aptitos.controller;
 
 import maslov.aptitos.domain.SuperUser;
-import maslov.aptitos.repo.MessageRepo;
+import maslov.aptitos.services.MessageService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +14,10 @@ import java.util.HashMap;
 @RequestMapping("/")
 public class MainController {
 
-    private final MessageRepo messageRepo;
+    private final MessageService messageService;
 
-    public MainController(MessageRepo messageRepo) {
-        this.messageRepo = messageRepo;
+    public MainController(MessageService messageService) {
+        this.messageService = messageService;
     }
 
     @GetMapping
@@ -25,7 +25,7 @@ public class MainController {
         HashMap<Object, Object> data = new HashMap<>();
 
         data.put("profile", superUser);
-        data.put("messages", messageRepo.findAll());
+        data.put("messages", messageService.allMessage());
 
         model.addAttribute("frontendData", data);
 

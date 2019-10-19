@@ -4,10 +4,12 @@ import maslov.aptitos.domain.Divisions;
 import maslov.aptitos.repo.DivisionsRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class DivisionsService {
     private int counter = 1;
     private final DivisionsRepo divisionsRepo;

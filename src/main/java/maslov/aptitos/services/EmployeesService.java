@@ -3,10 +3,12 @@ package maslov.aptitos.services;
 import maslov.aptitos.domain.Employees;
 import maslov.aptitos.repo.EmployeesRepo;
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class EmployeesService {
     private int counter = 1;
 

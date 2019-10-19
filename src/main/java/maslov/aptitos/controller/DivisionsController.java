@@ -1,7 +1,6 @@
 package maslov.aptitos.controller;
 
 import maslov.aptitos.domain.Divisions;
-import maslov.aptitos.repo.DivisionsRepo;
 import maslov.aptitos.services.DivisionsService;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +12,8 @@ import java.util.Optional;
 public class DivisionsController {
     private DivisionsService divisionsService;
 
-    public DivisionsController (DivisionsRepo divisionsRepo) {
-        divisionsService = new DivisionsService(divisionsRepo);
+    public DivisionsController(DivisionsService divisionsService) {
+        this.divisionsService = divisionsService;
     }
 
     @GetMapping
