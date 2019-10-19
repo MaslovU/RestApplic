@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Service
 public class DivisionsService {
-    private int counter = 1;
+
     private final DivisionsRepo divisionsRepo;
 
     @Autowired
@@ -27,8 +27,7 @@ public class DivisionsService {
         return divisionsRepo.findById(id);
     }
 
-    public Divisions createNewDivision(Divisions divisions) {
-        divisions.setId((long) counter++);
+    public synchronized Divisions createNewDivision(Divisions divisions) {
         return divisionsRepo.save(divisions);
     }
 

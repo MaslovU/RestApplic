@@ -28,7 +28,7 @@ public class MessageService  {
         return messageRepo.findById(id);
     }
 
-    public Message createMessage(Message message) {
+    public synchronized Message createMessage(Message message) {
         message.setCreationDate(LocalDateTime.now());
         return messageRepo.save(message);
     }

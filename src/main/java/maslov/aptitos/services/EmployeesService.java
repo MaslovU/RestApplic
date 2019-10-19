@@ -10,7 +10,6 @@ import java.util.Optional;
 
 @Service
 public class EmployeesService {
-    private int counter = 1;
 
     private final EmployeesRepo employeeRepo;
 
@@ -26,8 +25,7 @@ public class EmployeesService {
         return employeeRepo.findById(id);
     }
 
-    public Employees createNewEmployee(Employees employees) {
-        employees.setId((long) counter++);
+    public synchronized Employees createNewEmployee(Employees employees) {
         return employeeRepo.save(employees);
     }
 

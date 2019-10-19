@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @Service
 public class TelephonesService {
-    private int counter = 1;
 
     private final TelephonesRepo telephonesRepo;
 
@@ -28,8 +27,7 @@ public class TelephonesService {
         return telephonesRepo.findById(id);
     }
 
-    public Telephones createTelephone(Telephones telephones) {
-        telephones.setId((long) counter++);
+    public synchronized Telephones createTelephone(Telephones telephones) {
         return telephonesRepo.save(telephones);
     }
 
