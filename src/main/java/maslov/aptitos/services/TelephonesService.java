@@ -28,6 +28,7 @@ public class TelephonesService {
         return telephonesRepo.findById(id);
     }
 
+    @Transactional
     public synchronized Telephones createTelephone(Telephones telephones) {
         return telephonesRepo.save(telephones);
     }

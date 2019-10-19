@@ -27,6 +27,7 @@ public class EmployeesService {
         return employeeRepo.findById(id);
     }
 
+    @Transactional
     public synchronized Employees createNewEmployee(Employees employees) {
         return employeeRepo.save(employees);
     }
