@@ -1,6 +1,8 @@
 package maslov.aptitos.controller;
 
+import maslov.aptitos.domain.Divisions;
 import maslov.aptitos.domain.Employees;
+import maslov.aptitos.domain.Telephones;
 import maslov.aptitos.services.EmployeesService;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,9 +29,15 @@ public class EmployeeController {
         return employeesService.getEmployeeById(id);
     }
 
+    public static class EmployeeResp {
+        public String name;
+        public String newTelephone;
+//        public Divisions division;
+    }
+
     @PostMapping
-    public Employees createEmployee(@RequestBody Employees employees) {
-        return employeesService.createNewEmployee(employees);
+    public Employees createEmployee(@RequestBody EmployeeResp employee) {
+        return employeesService.createNewEmployee(employee);
     }
 
     @PutMapping("{id}")

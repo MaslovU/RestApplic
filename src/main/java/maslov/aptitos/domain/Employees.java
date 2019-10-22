@@ -24,7 +24,6 @@ public class Employees {
     @JoinColumn(name = "division_id")
     private Divisions division;
 
-
     public Long getId() {
         return id;
     }
@@ -45,15 +44,15 @@ public class Employees {
         return telephone;
     }
 
-    public void setTelephone(Telephones telephone) {
-        this.telephone = telephone;
-    }
-
     public Divisions getDivision() {
         return division;
     }
 
-    public void setDivision(Divisions division) {
-        this.division = division;
+    public void setTelephone(Telephones telephone_id) {
+        this.telephone = telephone_id;
+    }
+
+    public void setDivision(Divisions division_id) {
+        this.division = division_id;
     }
 }

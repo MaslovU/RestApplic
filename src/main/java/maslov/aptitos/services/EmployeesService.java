@@ -1,7 +1,10 @@
 package maslov.aptitos.services;
 
+import maslov.aptitos.controller.EmployeeController;
 import maslov.aptitos.domain.Employees;
 import maslov.aptitos.repo.EmployeesRepo;
+import maslov.aptitos.repo.TelephonesRepo;
+import maslov.aptitos.services.TelephonesService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,12 +14,13 @@ import java.util.Optional;
 
 @Service
 public class EmployeesService {
-    private int counter = 1;
 
     private final EmployeesRepo employeeRepo;
+    private  final TelephonesRepo telephonesRepo;
 
-    public EmployeesService(EmployeesRepo employeeRepo) {
+    public EmployeesService(EmployeesRepo employeeRepo, TelephonesRepo telephonesRepo) {
         this.employeeRepo = employeeRepo;
+        this.telephonesRepo = telephonesRepo;
     }
 
     public List<Employees> getEmployeeByName(String name) {
@@ -26,9 +30,19 @@ public class EmployeesService {
     public Optional<Employees> getEmployeeById(Long id) {
         return employeeRepo.findById(id);
     }
-
+/*
+Переделать метод создания сотрудника с автоматическим добавлением id подразделения и id телефона
+ */
     @Transactional
-    public synchronized Employees createNewEmployee(Employees employees) {
+    public synchronized Employees createNewEmployee(EmployeeController.EmployeeResp employee) {
+        Employees employees = new Employees();
+        employees.setName(employee.name);
+        telephonesRepo.findByTextContaining(employee.newTelephone);
+        if (employee.newTelephone == null) {
+//            createTelephone(employee.newTelephone);
+        }
+//        employees.setTelephone(employee.newTelephone);
+//        employees.setDivision(employee.division);
         return employeeRepo.save(employees);
     }
 
