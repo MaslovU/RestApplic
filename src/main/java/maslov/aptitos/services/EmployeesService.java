@@ -37,9 +37,12 @@ public class EmployeesService {
     public synchronized Employees createNewEmployee(EmployeeController.EmployeeResp employee) {
         Employees employees = new Employees();
         employees.setName(employee.name);
-        telephonesRepo.findByTextContaining(employee.newTelephone);
-        if (employee.newTelephone == null) {
-//            createTelephone(employee.newTelephone);
+        String tel = employee.newTelephone;
+//        telephonesRepo.findByTextContaining(employee.newTelephone);
+        if (telephonesRepo.findByTextContaining(employee.newTelephone) == null) {
+//            создать новыу запись в базе
+        } else {
+
         }
 //        employees.setTelephone(employee.newTelephone);
 //        employees.setDivision(employee.division);
