@@ -34,15 +34,14 @@ public class EmployeesService {
     public Optional<Employees> getEmployeeById(Long id) {
         return employeeRepo.findById(id);
     }
-/*
-Переделать метод создания сотрудника с автоматическим добавлением id подразделения и id телефона
- */
+
     @Transactional
     public synchronized Employees createNewEmployee(EmployeeController.EmployeeResp newEmployee) {
         Employees employee = new Employees();
-        employee.setName(newEmployee.name);
+
         Telephones tel = newEmployee.newTelephone;
         Divisions div = newEmployee.newDivision;
+
         if (telephonesRepo.findByText(tel.getText()).isEmpty()) {
 //            создать новыу запись в базе
             telephonesRepo.save(tel);
@@ -50,8 +49,11 @@ public class EmployeesService {
         if (divisionsRepo.findByText(tel.getText()).isEmpty()) {
             divisionsRepo.save(div);
         }
+
         Telephones telFromDB = telephonesRepo.findByText(tel.getText()).get(0);
         Divisions divFromDB = divisionsRepo.findByText(div.getText()).get(0);
+
+        employee.setName(newEmployee.name);
         employee.setTelephone(telFromDB);
         employee.setDivision(divFromDB);
 
