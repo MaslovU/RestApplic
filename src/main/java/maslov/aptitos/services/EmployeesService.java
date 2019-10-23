@@ -41,7 +41,9 @@ public class EmployeesService {
 
         Telephones tel = newEmployee.newTelephone;
         Divisions div = newEmployee.newDivision;
-
+/*
+search doesn't work
+ */
         if (telephonesRepo.findByText(tel.getText()).isEmpty()) {
 //            создать новыу запись в базе
             telephonesRepo.save(tel);
