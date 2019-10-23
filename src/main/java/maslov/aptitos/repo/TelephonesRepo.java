@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface TelephonesRepo extends JpaRepository<Telephones, Long> {
     List<Telephones> findByText(String text);
+    List<Telephones> findByTextLike(String text);
 }

@@ -41,14 +41,15 @@ public class EmployeesService {
 
         Telephones tel = newEmployee.newTelephone;
         Divisions div = newEmployee.newDivision;
-/*
-search doesn't work
- */
-        if (telephonesRepo.findByText(tel.getText()).isEmpty()) {
+
+        String newText = tel.getText();
+        String newDiv = div.getText();
+
+        if (telephonesRepo.findByText(newText).isEmpty()) {
 //            создать новыу запись в базе
             telephonesRepo.save(tel);
         }
-        if (divisionsRepo.findByText(tel.getText()).isEmpty()) {
+        if (divisionsRepo.findByText(newDiv).isEmpty()) {
             divisionsRepo.save(div);
         }
 
