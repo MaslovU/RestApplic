@@ -13,7 +13,7 @@ import java.util.Set;
 public class Telephones {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
     private String text;
 
