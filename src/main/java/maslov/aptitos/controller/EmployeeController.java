@@ -32,7 +32,7 @@ public class EmployeeController {
     public static class EmployeeResp {
         public String name;
         public Telephones newTelephone;
-//        public Divisions division;
+        public Divisions newDivision;
     }
 
     @PostMapping
