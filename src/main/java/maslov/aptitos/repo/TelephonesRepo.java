@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface TelephonesRepo extends JpaRepository<Telephones, Long> {
-    List<Telephones> findByTextContaining(String text);
+    List<Telephones> findByText(String text);
 }

@@ -39,11 +39,11 @@ public class EmployeesService {
         Employees employees = new Employees();
         employees.setName(employee.name);
         Telephones tel = employee.newTelephone;
-        if (telephonesRepo.findByTextContaining(tel.getText()).isEmpty()) {
+        if (telephonesRepo.findByText(tel.getText()).isEmpty()) {
 //            создать новыу запись в базе
             telephonesRepo.save(tel);
         }
-        Telephones telFromDB = telephonesRepo.findByTextContaining(tel.getText()).get(0);
+        Telephones telFromDB = telephonesRepo.findByText(tel.getText()).get(0);
         employees.setTelephone(telFromDB);
 
         return employeeRepo.save(employees);
