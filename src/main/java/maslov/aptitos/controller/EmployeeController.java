@@ -31,7 +31,7 @@ public class EmployeeController {
 
     public static class EmployeeResp {
         public String name;
-        public String newTelephone;
+        public Telephones newTelephone;
 //        public Divisions division;
     }
 

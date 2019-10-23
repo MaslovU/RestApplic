@@ -2,6 +2,7 @@ package maslov.aptitos.services;
 
 import maslov.aptitos.controller.EmployeeController;
 import maslov.aptitos.domain.Employees;
+import maslov.aptitos.domain.Telephones;
 import maslov.aptitos.repo.EmployeesRepo;
 import maslov.aptitos.repo.TelephonesRepo;
 import maslov.aptitos.services.TelephonesService;
@@ -37,15 +38,14 @@ public class EmployeesService {
     public synchronized Employees createNewEmployee(EmployeeController.EmployeeResp employee) {
         Employees employees = new Employees();
         employees.setName(employee.name);
-        String tel = employee.newTelephone;
-//        telephonesRepo.findByTextContaining(employee.newTelephone);
-        if (telephonesRepo.findByTextContaining(employee.newTelephone) == null) {
+        Telephones tel = employee.newTelephone;
+        if (telephonesRepo.findByTextContaining(tel.getText()).isEmpty()) {
 //            создать новыу запись в базе
-        } else {
-
+            telephonesRepo.save(tel);
         }
-//        employees.setTelephone(employee.newTelephone);
-//        employees.setDivision(employee.division);
+        Telephones telFromDB = telephonesRepo.findByTextContaining(tel.getText()).get(0);
+        employees.setTelephone(telFromDB);
+
         return employeeRepo.save(employees);
     }
 
