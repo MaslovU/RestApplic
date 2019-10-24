@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Employees {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
 
