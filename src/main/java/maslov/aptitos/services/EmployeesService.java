@@ -53,12 +53,9 @@ public class EmployeesService {
             divisionsRepo.save(div);
         }
 
-        Telephones telFromDB = telephonesRepo.findByText(tel.getText()).get(0);
-        Divisions divFromDB = divisionsRepo.findByText(div.getText()).get(0);
-
         employee.setName(newEmployee.name);
-        employee.setTelephone(telFromDB);
-        employee.setDivision(divFromDB);
+        employee.setTelephone(tel);
+        employee.setDivision(div);
 
         return employeeRepo.save(employee);
     }
