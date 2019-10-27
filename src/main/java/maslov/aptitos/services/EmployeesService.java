@@ -46,7 +46,7 @@ public class EmployeesService {
         String newDiv = div.getText();
 
         if (telephonesRepo.findByText(newText).isEmpty()) {
-//            создать новыу запись в базе
+//            создать новую запись в базе
             telephonesRepo.save(tel);
         }
         if (divisionsRepo.findByText(newDiv).isEmpty()) {
