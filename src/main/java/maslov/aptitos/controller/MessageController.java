@@ -1,3 +1,6 @@
+/*
+Created by Maslov
+ */
 package maslov.aptitos.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
