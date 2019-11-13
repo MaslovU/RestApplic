@@ -49,6 +49,10 @@ public class EmployeesService {
 //            если телефона не существует, создать новую запись в базе
             telephonesRepo.save(tel);
         }
+//        разобраться с этим блоком и каскадами
+//        else {
+//            tel.setId(telephonesRepo.findByText(newText).get(0).getId());
+//        }
         if (divisionsRepo.findByText(newDiv).isEmpty()) {
             divisionsRepo.save(div);
         }
