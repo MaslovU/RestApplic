@@ -31,4 +31,9 @@ dependencies {
 	compile('org.projectlombok:lombok')
 	compile('javax.xml.bind:jaxb-api')
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'io.rest-assured:rest-assured:4.2.0'
+	testImplementation 'io.rest-assured:json-path:4.2.0'
+	testImplementation 'io.rest-assured:spring-mock-mvc:4.2.0'
+	testImplementation 'io.rest-assured:json-schema-validator:4.2.0'
+	testImplementation 'io.rest-assured:xml-path:4.2.0'
 }
