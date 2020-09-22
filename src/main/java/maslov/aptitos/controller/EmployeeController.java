@@ -19,6 +19,12 @@ public class EmployeeController {
         this.employeesService = employeesService;
     }
 
+    public static class EmployeeResp {
+        public String name;
+        public Telephones newTelephone;
+        public Divisions newDivision;
+    }
+
     @GetMapping
     public List<Employees> getByName(@RequestParam String name) {
         return employeesService.getEmployeeByName(name);
@@ -27,12 +33,6 @@ public class EmployeeController {
     @GetMapping("{id}")
     public Optional<Employees> getEmployee(@PathVariable Long id) {
         return employeesService.getEmployeeById(id);
-    }
-
-    public static class EmployeeResp {
-        public String name;
-        public Telephones newTelephone;
-        public Divisions newDivision;
     }
 
     @PostMapping
@@ -48,7 +48,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping
-    public void delEmployee( @PathVariable Long id) {
+    public void delEmployee(@PathVariable Long id) {
         employeesService.deleteEmployeeByID(id);
     }
 }
