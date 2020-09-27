@@ -33,7 +33,7 @@ public class DivisionsController {
     }
 
     @PutMapping("{id}")
-    public Divisions update (
+    public Divisions update(
             @PathVariable("{id}") Divisions divisionsFromDB,
             @RequestBody Divisions divisions) {
         return divisionsService.updateDivision(divisions, divisionsFromDB);

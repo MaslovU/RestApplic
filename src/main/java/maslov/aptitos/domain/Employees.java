@@ -16,7 +16,7 @@ public class Employees {
     private Long id;
     private String name;
 
-//    fetch = FetchType.EAGER by default
+    //    fetch = FetchType.EAGER by default
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "telephone_id")
     private Telephones telephone;

@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface DivisionsRepo extends JpaRepository<Divisions, Long> {
     List<Divisions> findByText(String text);
+
     List<Divisions> findByTextLike(String text);
 }
