@@ -7,7 +7,6 @@ import maslov.aptitos.services.MessageService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("message")
@@ -27,7 +26,7 @@ public class MessageController {
 
     @GetMapping("{id}")
     @JsonView(Views.IdName.class)
-    public Optional getOneMessage(@PathVariable Long id) {
+    public Message getOneMessage(@PathVariable Long id) {
         return messageService.getMessage(id);
     }
 
