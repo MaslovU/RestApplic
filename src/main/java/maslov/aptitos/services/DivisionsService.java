@@ -19,7 +19,7 @@ public class DivisionsService {
     public DivisionsService(DivisionsRepo divisionsRepo) {
         this.divisionsRepo = divisionsRepo;
     }
-    
+
     public List<Divisions> allDivisions() {
         return divisionsRepo.findAll();
     }

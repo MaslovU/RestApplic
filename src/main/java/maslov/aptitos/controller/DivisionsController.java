@@ -11,7 +11,7 @@ import java.util.Optional;
 @RequestMapping("division")
 public class DivisionsController {
 
-    private DivisionsService divisionsService;
+    private final DivisionsService divisionsService;
 
     public DivisionsController(DivisionsService divisionsService) {
         this.divisionsService = divisionsService;
