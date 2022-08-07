@@ -39,15 +39,11 @@ public class EmployeesService {
     }
 
     @Transactional
-    public synchronized Employee createNewEmployee(EmployeeController.EmployeeResp newEmployee) {
+    public Employee createNewEmployee(EmployeeController.EmployeeResp newEmployee) {
         Employee employee = new Employee();
 
-        String newTelText = getTelephoneText(newEmployee.newTelephone);
-        String newDivText = getDivisionText(newEmployee.newDivision);
-
-        var tel = checkIfTelExist(newTelText, newEmployee);
-
-        var div = checkIfDivisionExist(newDivText, newEmployee);
+        var tel = checkIfTelExist(getTelephoneText(newEmployee.newTelephone), newEmployee);
+        var div = checkIfDivisionExist(getDivisionText(newEmployee.newDivision), newEmployee);
 
         employee.setName(newEmployee.getName());
         employee.setTelephone(tel);
@@ -73,14 +69,6 @@ public class EmployeesService {
 
     public List<Employee> findAllEmployees() {
         return employeeRepo.findAll();
-    }
-
-    private Telephone getTelephone(String newText) {
-        return telephonesRepo.findByText(newText);
-    }
-
-    private Division getDivision(String newDiv) {
-        return divisionsRepo.findByText(newDiv);
     }
 
     private String getTelephoneText(Telephone tel) {
