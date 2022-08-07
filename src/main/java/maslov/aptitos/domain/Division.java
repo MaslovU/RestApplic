@@ -10,15 +10,15 @@ import java.util.Set;
 @Table
 @ToString(of = {"id", "text"})
 @EqualsAndHashCode(of = {"id"})
-public class Telephones {
+public class Division {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String text;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "telephone")
-    private Set<Employees> employees;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "division")
+    private Set<Employee> employees;
 
     public Long getId() {
         return id;

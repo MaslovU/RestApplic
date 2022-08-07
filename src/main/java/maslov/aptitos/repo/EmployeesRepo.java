@@ -1,15 +1,15 @@
 package maslov.aptitos.repo;
 
-import maslov.aptitos.domain.Employees;
+import maslov.aptitos.domain.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface EmployeesRepo extends JpaRepository<Employees, Long> {
+public interface EmployeesRepo extends JpaRepository<Employee, Long> {
 
-    List<Employees> findByNameContaining(String name);
+    List<Employee> findByNameContaining(String name);
 
-    @Query("select e from Employees e where e.division.text =:text")
-    List<Employees> findByDivision(String text);
+    @Query("select e from Employee e where e.division.text =:text")
+    List<Employee> findByDivision(String text);
 }

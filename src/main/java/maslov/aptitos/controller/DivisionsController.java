@@ -1,6 +1,6 @@
 package maslov.aptitos.controller;
 
-import maslov.aptitos.domain.Divisions;
+import maslov.aptitos.domain.Division;
 import maslov.aptitos.services.DivisionsService;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,19 +23,19 @@ public class DivisionsController {
     }
 
     @GetMapping("{id}")
-    public Optional<Divisions> getOneDivision(@PathVariable Long id) {
+    public Optional<Division> getOneDivision(@PathVariable Long id) {
         return divisionsService.oneDivision(id);
     }
 
     @PostMapping
-    public Divisions createDiv(@RequestBody Divisions divisions) {
+    public Division createDiv(@RequestBody Division divisions) {
         return divisionsService.createNewDivision(divisions);
     }
 
     @PutMapping("{id}")
-    public Divisions update(
-            @PathVariable("{id}") Divisions divisionsFromDB,
-            @RequestBody Divisions divisions) {
+    public Division update(
+            @PathVariable("{id}") Division divisionsFromDB,
+            @RequestBody Division divisions) {
         return divisionsService.updateDivision(divisions, divisionsFromDB);
     }
 

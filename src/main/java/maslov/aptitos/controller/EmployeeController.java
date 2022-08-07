@@ -1,8 +1,10 @@
 package maslov.aptitos.controller;
 
-import maslov.aptitos.domain.Divisions;
-import maslov.aptitos.domain.Employees;
-import maslov.aptitos.domain.Telephones;
+import lombok.Getter;
+import maslov.aptitos.domain.Division;
+import maslov.aptitos.domain.Employee;
+import maslov.aptitos.domain.Telephone;
+import maslov.aptitos.model.EmployeeDO;
 import maslov.aptitos.services.EmployeesService;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,38 +15,39 @@ import java.util.Optional;
 @RequestMapping("employee")
 public class EmployeeController {
 
-    private EmployeesService employeesService;
+    private final EmployeesService employeesService;
 
     public EmployeeController(EmployeesService employeesService) {
         this.employeesService = employeesService;
     }
 
+    @Getter
     public static class EmployeeResp {
-        public String name;
-        public Telephones newTelephone;
-        public Divisions newDivision;
+        private String name;
+        public Telephone newTelephone;
+        public Division newDivision;
     }
 
     @GetMapping
-    public List<Employees> getByName(@RequestParam String name) {
+    public List<Employee> getByName(@RequestParam String name) {
         return employeesService.getEmployeeByName(name);
     }
 
     @GetMapping("{id}")
-    public Optional<Employees> getEmployee(@PathVariable Long id) {
+    public Optional<Employee> getEmployee(@PathVariable Long id) {
         return employeesService.getEmployeeById(id);
     }
 
     @PostMapping
-    public Employees createEmployee(@RequestBody EmployeeResp employee) {
+    public Employee createEmployee(@RequestBody EmployeeResp employee) {
         return employeesService.createNewEmployee(employee);
     }
 
     @PutMapping("{id}")
-    public Employees changeEmployee(
-            @PathVariable("id") Employees employeesFromDB,
-            @RequestBody Employees employees) {
-        return employeesService.editEmployee(employees, employeesFromDB);
+    public Employee changeEmployee(
+            @PathVariable("id") Employee employeesFromDB,
+            @RequestBody EmployeeDO employee) {
+        return employeesService.editEmployee(employee, employeesFromDB);
     }
 
     @DeleteMapping
