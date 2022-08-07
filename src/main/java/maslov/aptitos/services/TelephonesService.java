@@ -29,7 +29,7 @@ public class TelephonesService {
     }
 
     @Transactional
-    public synchronized Telephone createTelephone(Telephone telephones) {
+    public Telephone createTelephone(Telephone telephones) {
         return telephonesRepo.save(telephones);
     }
 

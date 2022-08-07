@@ -29,7 +29,7 @@ public class DivisionsService {
     }
 
     @Transactional
-    public synchronized Division createNewDivision(Division divisions) {
+    public Division createNewDivision(Division divisions) {
         return divisionsRepo.save(divisions);
     }
 

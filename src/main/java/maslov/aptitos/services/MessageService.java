@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class MessageService  {
+public class MessageService {
 
     private final MessageRepo messageRepo;
 
@@ -29,7 +29,7 @@ public class MessageService  {
     }
 
     @Transactional
-    public synchronized Message createMessage(Message message) {
+    public Message createMessage(Message message) {
         message.setCreationDate(LocalDateTime.now());
         return messageRepo.save(message);
     }

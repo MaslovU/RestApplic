@@ -15,14 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.util.StringUtils.hasText;
-
 @Service
 public class EmployeesService {
 
     private final EmployeesRepo employeeRepo;
-    private  final TelephonesRepo telephonesRepo;
-    private  final DivisionsRepo divisionsRepo;
+    private final TelephonesRepo telephonesRepo;
+    private final DivisionsRepo divisionsRepo;
 
     public EmployeesService(EmployeesRepo employeeRepo, TelephonesRepo telephonesRepo, DivisionsRepo divisionsRepo) {
         this.employeeRepo = employeeRepo;
@@ -99,7 +97,7 @@ public class EmployeesService {
         try {
             return div.getText();
         } catch (NullPointerException e) {
-            return  "";
+            return "";
         }
     }
 }
