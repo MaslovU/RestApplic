@@ -3,7 +3,6 @@ package maslov.aptitos;
 import io.restassured.common.mapper.TypeRef;
 import org.junit.Test;
 
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
