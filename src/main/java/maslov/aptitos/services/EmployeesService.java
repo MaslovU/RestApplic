@@ -40,8 +40,8 @@ public class EmployeesService {
     public Employee createNewEmployee(EmployeeController.EmployeeResp newEmployee) {
         Employee employee = new Employee();
 
-        var tel = checkIfTelExist(getTelephoneText(newEmployee.newTelephone), newEmployee);
-        var div = checkIfDivisionExist(getDivisionText(newEmployee.newDivision), newEmployee);
+        var tel = checkIfTelExist(getTelephoneText(newEmployee.getNewTelephone()), newEmployee);
+        var div = checkIfDivisionExist(getDivisionText(newEmployee.getNewDivision()), newEmployee);
 
         employee.setName(newEmployee.getName());
         employee.setTelephone(tel);
@@ -80,7 +80,7 @@ public class EmployeesService {
     private Telephone checkIfTelExist(String newTelText, EmployeeController.EmployeeResp newEmployee) {
         var savedTel = telephonesRepo.findByText(newTelText);
         if (savedTel.getText().isEmpty() && !newTelText.isEmpty()) {
-            return telephonesRepo.save(newEmployee.newTelephone);
+            return telephonesRepo.save(newEmployee.getNewTelephone());
         }
         return savedTel;
     }

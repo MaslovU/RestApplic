@@ -29,11 +29,22 @@ public class EmployeeController {
         this.employeesService = employeesService;
     }
 
-    @Getter
     public static class EmployeeResp {
         private String name;
-        public Telephone newTelephone;
-        public Division newDivision;
+        private Telephone newTelephone;
+        private Division newDivision;
+
+        public String getName() {
+            return name;
+        }
+
+        public Telephone getNewTelephone() {
+            return newTelephone;
+        }
+
+        public Division getNewDivision() {
+            return newDivision;
+        }
     }
 
     @GetMapping
