@@ -1,9 +1,9 @@
 package maslov.aptitos.services;
 
-import maslov.aptitos.controller.EmployeeController;
-import maslov.aptitos.domain.Divisions;
-import maslov.aptitos.domain.Employees;
-import maslov.aptitos.domain.Telephones;
+import maslov.aptitos.domain.Division;
+import maslov.aptitos.domain.Employee;
+import maslov.aptitos.domain.Telephone;
+import maslov.aptitos.model.EmployeeDO;
 import maslov.aptitos.repo.DivisionsRepo;
 import maslov.aptitos.repo.EmployeesRepo;
 import maslov.aptitos.repo.TelephonesRepo;
@@ -18,8 +18,8 @@ import java.util.Optional;
 public class EmployeesService {
 
     private final EmployeesRepo employeeRepo;
-    private  final TelephonesRepo telephonesRepo;
-    private  final DivisionsRepo divisionsRepo;
+    private final TelephonesRepo telephonesRepo;
+    private final DivisionsRepo divisionsRepo;
 
     public EmployeesService(EmployeesRepo employeeRepo, TelephonesRepo telephonesRepo, DivisionsRepo divisionsRepo) {
         this.employeeRepo = employeeRepo;
@@ -27,33 +27,22 @@ public class EmployeesService {
         this.divisionsRepo = divisionsRepo;
     }
 
-    public List<Employees> getEmployeeByName(String name) {
+    public List<Employee> getEmployeeByName(String name) {
         return employeeRepo.findByNameContaining(name);
     }
 
-    public Optional<Employees> getEmployeeById(Long id) {
+    public Optional<Employee> getEmployeeById(Long id) {
         return employeeRepo.findById(id);
     }
 
     @Transactional
-    public synchronized Employees createNewEmployee(EmployeeController.EmployeeResp newEmployee) {
-        Employees employee = new Employees();
+    public Employee createNewEmployee(EmployeeDO newEmployee) {
+        Employee employee = new Employee();
 
-        Telephones tel = newEmployee.newTelephone;
-        Divisions div = newEmployee.newDivision;
+        var tel = checkIfTelExist(getTelephoneText(newEmployee.getTelephone()), newEmployee);
+        var div = checkIfDivisionExist(getDivisionText(newEmployee.getDivision()), newEmployee);
 
-        String newText = tel.getText();
-        String newDiv = div.getText();
-
-        if (telephonesRepo.findByText(newText).isEmpty()) {
-//            создать новую запись в базе
-            telephonesRepo.save(tel);
-        }
-        if (divisionsRepo.findByText(newDiv).isEmpty()) {
-            divisionsRepo.save(div);
-        }
-
-        employee.setName(newEmployee.name);
+        employee.setName(newEmployee.getName());
         employee.setTelephone(tel);
         employee.setDivision(div);
 
@@ -61,8 +50,8 @@ public class EmployeesService {
     }
 
     @Transactional
-    public Employees editEmployee(Employees employees, Employees employeesFromDB) {
-        BeanUtils.copyProperties(employees, employeesFromDB, "id");
+    public Employee editEmployee(EmployeeDO employee, Employee employeesFromDB) {
+        BeanUtils.copyProperties(employee, employeesFromDB, "id");
         return employeeRepo.save(employeesFromDB);
     }
 
@@ -71,11 +60,43 @@ public class EmployeesService {
         employeeRepo.deleteById(id);
     }
 
-    public List<Employees> findEmployeeInfoByDivision(String text) {
+    public List<Employee> findEmployeeInfoByDivision(String text) {
         return employeeRepo.findByDivision(text);
     }
 
-    public List<Employees> findAllEmployees() {
+    public List<Employee> findAllEmployees() {
         return employeeRepo.findAll();
+    }
+
+    private String getTelephoneText(Telephone tel) {
+        try {
+            return tel.getText();
+        } catch (NullPointerException e) {
+            return "";
+        }
+    }
+
+    private Telephone checkIfTelExist(String newTelText, EmployeeDO newEmployee) {
+        var savedTel = telephonesRepo.findByText(newTelText);
+        if (savedTel.getText().isEmpty() && !newTelText.isEmpty()) {
+            return telephonesRepo.save(newEmployee.getTelephone());
+        }
+        return savedTel;
+    }
+
+    private Division checkIfDivisionExist(String newDivText, EmployeeDO newEmployee) {
+        var savedDiv = divisionsRepo.findByText(newDivText);
+        if (savedDiv.getText().isEmpty()) {
+            return divisionsRepo.save(newEmployee.getDivision());
+        }
+        return savedDiv;
+    }
+
+    private String getDivisionText(Division div) {
+        try {
+            return div.getText();
+        } catch (NullPointerException e) {
+            return "";
+        }
     }
 }

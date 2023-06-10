@@ -1,6 +1,6 @@
 package maslov.aptitos.services;
 
-import maslov.aptitos.domain.Divisions;
+import maslov.aptitos.domain.Division;
 import maslov.aptitos.repo.DivisionsRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,22 +19,22 @@ public class DivisionsService {
     public DivisionsService(DivisionsRepo divisionsRepo) {
         this.divisionsRepo = divisionsRepo;
     }
-    
-    public List<Divisions> allDivisions() {
+
+    public List<Division> allDivisions() {
         return divisionsRepo.findAll();
     }
 
-    public Optional<Divisions> oneDivision(Long id) {
+    public Optional<Division> oneDivision(Long id) {
         return divisionsRepo.findById(id);
     }
 
     @Transactional
-    public synchronized Divisions createNewDivision(Divisions divisions) {
+    public Division createNewDivision(Division divisions) {
         return divisionsRepo.save(divisions);
     }
 
     @Transactional
-    public Divisions updateDivision(Divisions divisions, Divisions divisionsFromDB) {
+    public Division updateDivision(Division divisions, Division divisionsFromDB) {
         BeanUtils.copyProperties(divisions, divisionsFromDB, "id");
         return divisionsRepo.save(divisionsFromDB);
     }

@@ -1,6 +1,6 @@
 package maslov.aptitos.services;
 
-import maslov.aptitos.domain.Telephones;
+import maslov.aptitos.domain.Telephone;
 import maslov.aptitos.repo.TelephonesRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,21 +20,21 @@ public class TelephonesService {
         this.telephonesRepo = telephonesRepo;
     }
 
-    public List<Telephones> findAllTelephones() {
+    public List<Telephone> findAllTelephones() {
         return telephonesRepo.findAll();
     }
 
-    public Optional getOneTelephone(Long id) {
+    public Optional<Telephone> getOneTelephone(Long id) {
         return telephonesRepo.findById(id);
     }
 
     @Transactional
-    public synchronized Telephones createTelephone(Telephones telephones) {
+    public Telephone createTelephone(Telephone telephones) {
         return telephonesRepo.save(telephones);
     }
 
     @Transactional
-    public Telephones changeTelephones(Telephones telephones, Telephones telephonesFromDB) {
+    public Telephone changeTelephones(Telephone telephones, Telephone telephonesFromDB) {
         BeanUtils.copyProperties(telephones, telephonesFromDB, "id");
         return telephonesRepo.save(telephonesFromDB);
     }

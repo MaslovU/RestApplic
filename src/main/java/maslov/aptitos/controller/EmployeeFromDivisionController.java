@@ -1,6 +1,6 @@
 package maslov.aptitos.controller;
 
-import maslov.aptitos.domain.Employees;
+import maslov.aptitos.domain.Employee;
 import maslov.aptitos.services.EmployeesService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +20,7 @@ public class EmployeeFromDivisionController {
     }
 
     @GetMapping
-    List<Employees> findEmployeeFromDivision(@RequestParam String text) {
+    List<Employee> findEmployeeFromDivision(@RequestParam String text) {
         return employeesService.findEmployeeInfoByDivision(text);
     }
 }

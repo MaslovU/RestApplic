@@ -1,8 +1,15 @@
 package maslov.aptitos.controller;
 
-import maslov.aptitos.domain.Telephones;
+import maslov.aptitos.domain.Telephone;
 import maslov.aptitos.services.TelephonesService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,24 +25,24 @@ public class TelephonesController {
     }
 
     @GetMapping
-    public List<Telephones> getAll() {
+    public List<Telephone> getAll() {
         return telephonesService.findAllTelephones();
     }
 
     @GetMapping("{id}")
-    public Optional getTelephone(@PathVariable Long id) {
+    public Optional<Telephone> getTelephone(@PathVariable Long id) {
         return telephonesService.getOneTelephone(id);
     }
 
     @PostMapping
-    public Telephones createTel(@RequestBody Telephones telephones) {
+    public Telephone createTel(@RequestBody Telephone telephones) {
         return telephonesService.createTelephone(telephones);
     }
 
     @PutMapping("{id}")
-    public Telephones changeTel(
-            @PathVariable("id") Telephones telephonesFromDB,
-            @RequestBody Telephones telephones) {
+    public Telephone changeTel(
+            @PathVariable("id") Telephone telephonesFromDB,
+            @RequestBody Telephone telephones) {
         return telephonesService.changeTelephones(telephones, telephonesFromDB);
     }
 

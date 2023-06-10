@@ -9,10 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class MessageService  {
+public class MessageService {
 
     private final MessageRepo messageRepo;
 
@@ -25,12 +24,12 @@ public class MessageService  {
         return messageRepo.findAll();
     }
 
-    public Optional getMessage(Long id) {
-        return messageRepo.findById(id);
+    public Message getMessage(Long id) {
+        return messageRepo.findById(id).get();
     }
 
     @Transactional
-    public synchronized Message createMessage(Message message) {
+    public Message createMessage(Message message) {
         message.setCreationDate(LocalDateTime.now());
         return messageRepo.save(message);
     }
@@ -42,7 +41,8 @@ public class MessageService  {
     }
 
     @Transactional
-    public void delMessage(Long id) {
+    public boolean delMessage(Long id) {
         messageRepo.deleteById(id);
+        return true;
     }
 }
