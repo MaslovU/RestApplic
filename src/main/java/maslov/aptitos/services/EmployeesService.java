@@ -1,6 +1,5 @@
 package maslov.aptitos.services;
 
-import maslov.aptitos.controller.EmployeeController;
 import maslov.aptitos.domain.Division;
 import maslov.aptitos.domain.Employee;
 import maslov.aptitos.domain.Telephone;
@@ -37,11 +36,11 @@ public class EmployeesService {
     }
 
     @Transactional
-    public Employee createNewEmployee(EmployeeController.EmployeeResp newEmployee) {
+    public Employee createNewEmployee(EmployeeDO newEmployee) {
         Employee employee = new Employee();
 
-        var tel = checkIfTelExist(getTelephoneText(newEmployee.getNewTelephone()), newEmployee);
-        var div = checkIfDivisionExist(getDivisionText(newEmployee.getNewDivision()), newEmployee);
+        var tel = checkIfTelExist(getTelephoneText(newEmployee.getTelephone()), newEmployee);
+        var div = checkIfDivisionExist(getDivisionText(newEmployee.getDivision()), newEmployee);
 
         employee.setName(newEmployee.getName());
         employee.setTelephone(tel);
@@ -77,18 +76,18 @@ public class EmployeesService {
         }
     }
 
-    private Telephone checkIfTelExist(String newTelText, EmployeeController.EmployeeResp newEmployee) {
+    private Telephone checkIfTelExist(String newTelText, EmployeeDO newEmployee) {
         var savedTel = telephonesRepo.findByText(newTelText);
         if (savedTel.getText().isEmpty() && !newTelText.isEmpty()) {
-            return telephonesRepo.save(newEmployee.getNewTelephone());
+            return telephonesRepo.save(newEmployee.getTelephone());
         }
         return savedTel;
     }
 
-    private Division checkIfDivisionExist(String newDivText, EmployeeController.EmployeeResp newEmployee) {
+    private Division checkIfDivisionExist(String newDivText, EmployeeDO newEmployee) {
         var savedDiv = divisionsRepo.findByText(newDivText);
         if (savedDiv.getText().isEmpty()) {
-            return divisionsRepo.save(newEmployee.getNewDivision());
+            return divisionsRepo.save(newEmployee.getDivision());
         }
         return savedDiv;
     }

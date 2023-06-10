@@ -1,9 +1,6 @@
 package maslov.aptitos.controller;
 
-import lombok.Getter;
-import maslov.aptitos.domain.Division;
 import maslov.aptitos.domain.Employee;
-import maslov.aptitos.domain.Telephone;
 import maslov.aptitos.model.EmployeeDO;
 import maslov.aptitos.services.EmployeesService;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,23 +26,23 @@ public class EmployeeController {
         this.employeesService = employeesService;
     }
 
-    public static class EmployeeResp {
-        private String name;
-        private Telephone newTelephone;
-        private Division newDivision;
-
-        public String getName() {
-            return name;
-        }
-
-        public Telephone getNewTelephone() {
-            return newTelephone;
-        }
-
-        public Division getNewDivision() {
-            return newDivision;
-        }
-    }
+//    public static class EmployeeResp {
+//        private String name;
+//        private Telephone newTelephone;
+//        private Division newDivision;
+//
+//        public String getName() {
+//            return name;
+//        }
+//
+//        public Telephone getNewTelephone() {
+//            return newTelephone;
+//        }
+//
+//        public Division getNewDivision() {
+//            return newDivision;
+//        }
+//    }
 
     @GetMapping
     public List<Employee> getByName(@RequestParam String name) {
@@ -58,7 +55,7 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public Employee createEmployee(@RequestBody EmployeeResp employee) {
+    public Employee createEmployee(@RequestBody EmployeeDO employee) {
         return employeesService.createNewEmployee(employee);
     }
 
