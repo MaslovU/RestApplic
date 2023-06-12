@@ -3,7 +3,6 @@ package maslov.aptitos.services;
 import maslov.aptitos.domain.Division;
 import maslov.aptitos.repo.DivisionsRepo;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +14,6 @@ public class DivisionsService {
 
     private final DivisionsRepo divisionsRepo;
 
-    @Autowired
     public DivisionsService(DivisionsRepo divisionsRepo) {
         this.divisionsRepo = divisionsRepo;
     }

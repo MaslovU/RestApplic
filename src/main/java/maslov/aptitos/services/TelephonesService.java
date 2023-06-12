@@ -3,7 +3,6 @@ package maslov.aptitos.services;
 import maslov.aptitos.domain.Telephone;
 import maslov.aptitos.repo.TelephonesRepo;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +14,6 @@ public class TelephonesService {
 
     private final TelephonesRepo telephonesRepo;
 
-    @Autowired
     public TelephonesService(TelephonesRepo telephonesRepo) {
         this.telephonesRepo = telephonesRepo;
     }

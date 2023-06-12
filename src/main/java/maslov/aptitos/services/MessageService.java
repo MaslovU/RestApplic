@@ -9,13 +9,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+
+import static java.util.Optional.ofNullable;
 
 @Service
 public class MessageService {
 
     private final MessageRepo messageRepo;
 
-    @Autowired
     public MessageService(MessageRepo messageRepo) {
         this.messageRepo = messageRepo;
     }
@@ -25,7 +27,7 @@ public class MessageService {
     }
 
     public Message getMessage(Long id) {
-        return messageRepo.findById(id).get();
+        return Optional.of(messageRepo.findById(id)).get().orElse(new Message());
     }
 
     @Transactional
